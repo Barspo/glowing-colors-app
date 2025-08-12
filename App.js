@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
@@ -10,33 +10,39 @@ export default function App() {
   };
 
   return (
-    <View style={[
+    <SafeAreaView style={[
       styles.container,
       { backgroundColor: isGreen ? '#00ff00' : '#ff0000' }
     ]}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={toggleColor}
-      >
-        <Text style={styles.buttonText}>
-          Switch to {isGreen ? 'Red' : 'Green'}
-        </Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={toggleColor}
+        >
+          <Text style={styles.buttonText}>
+            Switch to {isGreen ? 'Red' : 'Green'}
+          </Text>
+        </TouchableOpacity>
+      </View>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+  },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
     alignItems: 'center',
+    paddingBottom: 40,
   },
   button: {
     backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
+    padding: 10,
+    borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -45,10 +51,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    width: 120,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#333',
+    textAlign: 'center',
   },
 });
