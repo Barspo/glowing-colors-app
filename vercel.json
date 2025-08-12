@@ -1,0 +1,6 @@
+{
+  "buildCommand": "npx expo export:web",
+  "outputDirectory": "web-build",
+  "framework": "create-react-app",
+  "devCommand": "npx expo start --web"
+}
