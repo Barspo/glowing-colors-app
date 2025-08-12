@@ -17,32 +17,42 @@ const ColorScreen = ({ onBack }) => {
       <TouchableOpacity
         style={styles.touchable}
         onPress={toggleColor}
-      >
-        <View style={styles.logoContainer}>
-          <Image
-            source={require('./assets/logo.png')}
-            style={styles.logo}
-          />
-        </View>
-      </TouchableOpacity>
+      />
       <StatusBar style="auto" />
     </SafeAreaView>
   );
 };
 
 const WelcomeScreen = ({ onStart }) => {
+  const [pressed, setPressed] = useState(false);
+
+  const handlePressIn = () => {
+    setPressed(true);
+  };
+
+  const handlePressOut = () => {
+    setPressed(false);
+    onStart();
+  };
+
   return (
     <TouchableOpacity 
-      style={styles.welcomeContainer}
-      onPress={onStart}
+      style={[styles.welcomeContainer, pressed && styles.welcomeContainerPressed]}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
     >
-      <View style={styles.welcomeContent}>
-        <Image
-          source={require('./assets/logo.png')}
-          style={styles.welcomeLogo}
-        />
-        <Text style={styles.welcomeText}>
-          ברוכים הבאים למשחק של יש עתיד, להתחלה והחלפת צבעים יש ללחוץ על המסך
+      <View style={[styles.welcomeContent, pressed && styles.welcomeContentPressed]}>
+        <View style={styles.logoWrapper}>
+          <Image
+            source={require('./assets/logo.png')}
+            style={[styles.welcomeLogo, pressed && styles.welcomeLogoPressed]}
+          />
+        </View>
+        <Text style={[styles.welcomeText, pressed && styles.welcomeTextPressed]}>
+          ברוכים הבאים למשחק של יש עתיד
+        </Text>
+        <Text style={[styles.welcomeSubText, pressed && styles.welcomeTextPressed]}>
+          להתחלה והחלפת צבעים יש ללחוץ על המסך
         </Text>
       </View>
     </TouchableOpacity>
@@ -72,30 +82,30 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  logoContainer: {
-    position: 'absolute',
-    top: 10,
-    left: 10,
-    padding: 10,
-    borderRadius: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    zIndex: 1,
-  },
-  logo: {
-    width: 150,
-    height: 75,
-    resizeMode: 'contain',
-  },
   welcomeContainer: {
     flex: 1,
     backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  welcomeContainerPressed: {
+    backgroundColor: '#f0f0f0',
+  },
   welcomeContent: {
     padding: 20,
     alignItems: 'center',
     width: '100%',
+    transform: [{ scale: 1 }],
+  },
+  welcomeContentPressed: {
+    transform: [{ scale: 0.98 }],
+  },
+  logoWrapper: {
+    width: 280,
+    height: 140,
+    marginBottom: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   welcomeLogo: {
     width: 200,
@@ -103,12 +113,32 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginBottom: 30,
   },
+  welcomeLogo: {
+    width: 260,
+    height: 130,
+    resizeMode: 'contain',
+  },
+  welcomeLogoPressed: {
+    opacity: 0.8,
+  },
   welcomeText: {
-    fontSize: 24,
-    textAlign: 'right',
+    fontSize: 28,
+    textAlign: 'center',
     color: '#333333',
     writingDirection: 'rtl',
     marginHorizontal: 20,
-    fontWeight: '500'
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  welcomeSubText: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: '#666666',
+    writingDirection: 'rtl',
+    marginHorizontal: 20,
+    fontWeight: '500',
+  },
+  welcomeTextPressed: {
+    opacity: 0.7,
   }
 });
