@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 60,
   },
   welcomeContainerPressed: {
     backgroundColor: '#f0f0f0',
@@ -101,11 +102,12 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.98 }],
   },
   logoWrapper: {
-    width: 280,
-    height: 140,
-    marginBottom: 40,
+    width: 320,
+    height: 160,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: -40,
+    marginBottom: 20,
   },
   welcomeLogo: {
     width: 200,
@@ -114,9 +116,10 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   welcomeLogo: {
-    width: 260,
-    height: 130,
+    width: 300,
+    height: 150,
     resizeMode: 'contain',
+    marginBottom: 40,
   },
   welcomeLogoPressed: {
     opacity: 0.8,
