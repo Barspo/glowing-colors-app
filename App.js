@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, SafeAreaView, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-export default function App() {
+const ColorScreen = ({ onBack }) => {
   const [isGreen, setIsGreen] = useState(true);
 
   const toggleColor = () => {
@@ -28,6 +28,39 @@ export default function App() {
       <StatusBar style="auto" />
     </SafeAreaView>
   );
+};
+
+const WelcomeScreen = ({ onStart }) => {
+  return (
+    <TouchableOpacity 
+      style={styles.welcomeContainer}
+      onPress={onStart}
+    >
+      <View style={styles.welcomeContent}>
+        <Image
+          source={require('./assets/logo.png')}
+          style={styles.welcomeLogo}
+        />
+        <Text style={styles.welcomeText}>
+          ברוכים הבאים למשחק של יש עתיד, להתחלה והחלפת צבעים יש ללחוץ על המסך
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+export default function App() {
+  const [showWelcome, setShowWelcome] = useState(true);
+
+  const handleStart = () => {
+    setShowWelcome(false);
+  };
+
+  return showWelcome ? (
+    <WelcomeScreen onStart={handleStart} />
+  ) : (
+    <ColorScreen />
+  );
 }
 
 const styles = StyleSheet.create({
@@ -52,5 +85,30 @@ const styles = StyleSheet.create({
     width: 150,
     height: 75,
     resizeMode: 'contain',
+  },
+  welcomeContainer: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  welcomeContent: {
+    padding: 20,
+    alignItems: 'center',
+    width: '100%',
+  },
+  welcomeLogo: {
+    width: 200,
+    height: 100,
+    resizeMode: 'contain',
+    marginBottom: 30,
+  },
+  welcomeText: {
+    fontSize: 24,
+    textAlign: 'right',
+    color: '#333333',
+    writingDirection: 'rtl',
+    marginHorizontal: 20,
+    fontWeight: '500'
   }
 });
