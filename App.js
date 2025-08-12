@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, SafeAreaView, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
@@ -17,6 +17,10 @@ export default function App() {
       ]}
       onPress={toggleColor}
     >
+      <Image
+        source={require('./assets/logo.png')}
+        style={styles.logo}
+      />
       <StatusBar style="auto" />
     </TouchableOpacity>
   );
@@ -25,5 +29,13 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  logo: {
+    width: 100,
+    height: 50,
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: 40,
+    left: 20,
   }
 });
